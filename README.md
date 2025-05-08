@@ -1,6 +1,6 @@
 # TesteQa - Automação de Testes
 
-O projeto **TesteQa** é uma aplicação voltada para a automação de testes em produtos eletrônicos. Projeto criado para desenvolvimento pessoal.
+O projeto **TesteQa** é uma aplicação voltada para a automação de testes em produtos eletrônicos. Projeto criado para desenvolvimento para etapa de teste de processo seletivo.
 
 ## Testes Automatizados
 
