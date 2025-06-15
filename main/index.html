@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista de Presença - Excursão</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #000;
+      color: #fff;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .controls input,
+    .controls button {
+      padding: 10px 14px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .lista {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      color: #000;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .item input[type="checkbox"] {
+      margin-right: 10px;
+      width: 28px;
+      height: 28px;
+      accent-color: #007bff;
+    }
+
+    @media (max-width: 500px) {
+      label {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Lista de Presença - Excursão</h1>
+
+  <div class="controls">
+    <input type="text" id="search" placeholder="Pesquisar nome..." oninput="filtrarLista()" />
+    <button onclick="mostrarNaoMarcados()">Mostrar apenas não marcados</button>
+    <button onclick="limparFiltros()">Limpar filtros</button>
+  </div>
+
+  <div class="lista" id="lista"></div>
+
+  <script>
+    const nomes = [
+      "Douglas Vieira de Assumpção",
+      "Daniel Xavier Rodrigues",
+      "Benito Leopondo R Brito",
+      "Larissa dos Santos Rodrigues",
+      "Gabriela Araujo dos Santos",
+      "Grazieli Araujo dos Santos",
+      "Gabrielly Nascimento",
+      "Enilda Nascimento",
+      "Kerem Vitoria X. Rodrigues",
+      "Miguel Fagundes",
+      "Yego Kelzon Marques da Silva",
+      "Julio Cezar",
+      "Beatriz (filha da emily)",
+      "Raissa Vitoria Xavier Rodrigues",
+      "Ester Pereira (filha da Shirley)",
+      "Mirian Vitoria Xavier Rodrigues",
+      "Davi Miguel X. Rodrigues (meia)",
+      "Carina F. Xavier Rodrigues",
+      "Alexandre Fernandes  Rodrigues",
+      "Ana Lucia Vieira dos Santos",
+      "Paulo Cesar dos Santos",
+      "Alice Domingues de Lima",
+      "Maria Clara Chrisostomo Frota",
+      "Carlos Emanuel C. Frota",
+      "Raquel Figueiredo dos Santos",
+      "Julia Rocumback",
+      "Tarcisio Feitoza Laia de Oliveira",
+      "Laura de Souza Celestino",
+      "Larissa Moreira dos Santos",
+      "Jefeson Pereira de Oliveira",
+      "Henrique Sincero da Silva",
+      "Emivaldo da Silva",
+      "Karine Peixoto Lima",
+      "Núbia Alexandre M. Zeferino",
+      "Joana Justiniana F. Gomes",
+      "Marcela Sara de Sá",
+      "Emily de Moura Ferreira",
+      "Marialva E. de Almeida",
+      "Thalles Bryan Almeida prado",
+      "Esmeralda Rosa de Souza",
+      "Rosangela Almeida Costa",
+      "Júlia Alves Neri",
+      "Mayara Gomes Muniz"
+    ];
+
+    function carregarLista() {
+      const lista = document.getElementById('lista');
+      lista.innerHTML = '';
+
+      nomes.forEach((nome, index) => {
+        const item = document.createElement('div');
+        item.className = 'item';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `chk_${index}`;
+
+        const label = document.createElement('label');
+        label.setAttribute('for', checkbox.id);
+        label.textContent = nome;
+
+        item.appendChild(checkbox);
+        item.appendChild(label);
+        lista.appendChild(item);
+      });
+    }
+
+    function filtrarLista() {
+      const termo = document.getElementById('search').value.toLowerCase();
+      const itens = document.querySelectorAll('.lista .item');
+      itens.forEach(item => {
+        const nome = item.textContent.toLowerCase();
+        item.style.display = nome.includes(termo) ? 'flex' : 'none';
+      });
+    }
+
+    function mostrarNaoMarcados() {
+      const itens = document.querySelectorAll('.lista .item');
+      itens.forEach(item => {
+        const checkbox = item.querySelector('input[type="checkbox"]');
+        item.style.display = !checkbox.checked ? 'flex' : 'none';
+      });
+    }
+
+    function limparFiltros() {
+      document.getElementById('search').value = '';
+      document.querySelectorAll('.lista .item').forEach(item => {
+        item.style.display = 'flex';
+      });
+    }
+
+    window.onload = carregarLista;
+  </script>
+</body>
+</html>
